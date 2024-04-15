@@ -1,0 +1,476 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Week 10: Writing Functions},
+  pdfauthor={Gracie Ann Fischer},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Week 10: Writing Functions}
+\author{Gracie Ann Fischer}
+\date{2024-04-09}
+
+\begin{document}
+\maketitle
+
+\hypertarget{writing-our-own-functions}{%
+\section{Writing Our Own Functions}\label{writing-our-own-functions}}
+
+\hypertarget{understandable-and-reusable-code}{%
+\subsubsection{Understandable and Reusable
+code}\label{understandable-and-reusable-code}}
+
+Writing our own functions can help us to write code in understandable
+chunks and also make more reusable code.
+
+We often run into instances where we want to do something many times but
+slightly differently.
+
+If you find yourself needing to run the same calculations or make the
+same plot repeatedly, writing a function to accomplish that task can
+save you from copying and pasting the same code over and over again.
+
+Doing this can reduce errors in your code as well as condense the code
+into more understandable bits.
+
+\hypertarget{function-structure}{%
+\subsection{Function Structure}\label{function-structure}}
+
+Below, I've written out the general structure of a function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function\_name \textless{}{-} function(inputs) \{}
+\CommentTok{\#   output \textless{}{-} do\_something(inputs)}
+\CommentTok{\#   return(output)}
+\CommentTok{\# \}}
+\end{Highlighting}
+\end{Shaded}
+
+The braces indicate that the lines of code are a group that gets run
+together.
+
+\begin{itemize}
+\tightlist
+\item
+  A function will run all of the lines of code in the braces using the
+  arguments provided.
+\item
+  We then need to return the output using the \texttt{return()}
+  function.
+\end{itemize}
+
+Let's write out our first function. We want to calculate shrub volumes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calc\_shrub\_vol }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(length, width, height) \{}
+\NormalTok{  area }\OtherTok{\textless{}{-}}\NormalTok{ length }\SpecialCharTok{*}\NormalTok{ width}
+\NormalTok{  volume }\OtherTok{\textless{}{-}}\NormalTok{ area }\SpecialCharTok{*}\NormalTok{ height}
+  \FunctionTok{return}\NormalTok{(volume)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+It is important to note that writing the function does not create the
+function. We have to remember to run the code to create the function and
+add it to our environment.
+
+When we run this code chunk above, we can see that the function gets
+added to our environment in a new section called ``functions.''
+
+Let's use our new function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.56
+\end{verbatim}
+
+As with other functions, we can store the output as an object to use
+later.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shrub\_vol }\OtherTok{\textless{}{-}} \FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lets-practice}{%
+\paragraph{Let's Practice!}\label{lets-practice}}
+
+Work on Question 1 in the Assignment.
+
+\hypertarget{black-box}{%
+\subsubsection{Black Box}\label{black-box}}
+
+It is important to remember a few things about functions. In many ways,
+we need to treat functions as a black box.
+
+What we mean by this is that the only thing that the function knows
+about are the inputs we give it.
+
+Similarly, the only thing our environment know about the function is the
+output that we ask the function to return to us.
+
+So, in the function above, we can't ``access'' variables or arguments
+that are created within the function. The function exists within it's
+own environment, so to speak.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{width}
+\NormalTok{volume}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lets-practice-1}{%
+\paragraph{Let's Practice!}\label{lets-practice-1}}
+
+Work on Question 2 in the Assignment.
+
+\hypertarget{default-arguments}{%
+\subsubsection{Default arguments}\label{default-arguments}}
+
+As with many of the functions that we have already used in this class,
+we can set defaults for the arguments in the functions that we create.
+
+For example, if many of our shrubs are the same height, we could specify
+that the default height should be 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calc\_shrub\_vol }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(length, width, }\AttributeTok{height =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  area }\OtherTok{\textless{}{-}}\NormalTok{ length }\SpecialCharTok{*}\NormalTok{ width}
+\NormalTok{  volume }\OtherTok{\textless{}{-}}\NormalTok{ area }\SpecialCharTok{*}\NormalTok{ height}
+  \FunctionTok{return}\NormalTok{(volume)}
+\NormalTok{\}}
+
+\FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.28
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.56
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calc\_shrub\_vol}\NormalTok{(}\AttributeTok{length =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{width =} \FloatTok{1.6}\NormalTok{, }\AttributeTok{height =} \FloatTok{2.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.56
+\end{verbatim}
+
+\hypertarget{combining-functions}{%
+\subsubsection{Combining Functions}\label{combining-functions}}
+
+Again, as with other functions, we can combine functions of our own
+creation together.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{est\_shrub\_mass }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(volume)\{}
+\NormalTok{  mass }\OtherTok{\textless{}{-}} \FloatTok{2.65} \SpecialCharTok{*}\NormalTok{ volume}\SpecialCharTok{\^{}}\FloatTok{0.9}
+\NormalTok{\}}
+
+\NormalTok{shrub\_volume }\OtherTok{\textless{}{-}} \FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.0}\NormalTok{)}
+\NormalTok{shrub\_mass }\OtherTok{\textless{}{-}} \FunctionTok{est\_shrub\_mass}\NormalTok{(shrub\_volume)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also use pipes with our own functions. The output from the first
+function becomes the first argument for the second function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shrub\_mass }\OtherTok{\textless{}{-}} \FunctionTok{calc\_shrub\_vol}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{est\_shrub\_mass}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{using-the-tidyverse-in-functions}{%
+\subsubsection{\texorpdfstring{Using the \texttt{tidyverse} in
+Functions}{Using the tidyverse in Functions}}\label{using-the-tidyverse-in-functions}}
+
+One of the really nice things about the \texttt{tidyverse} is that we
+usually don't need to put columns in quotes.
+
+This is because they use ``tidy evaluation,'' a special type of
+non-standard evaluation. Basically, they do fancy things under the
+surface to make them easier to work with.
+
+This is useful for when \emph{using} functions from the
+\texttt{tidyverse}, but it means that we need to add an extra step when
+we use \texttt{tidyverse} functions within our own functions that we are
+\emph{writing}.
+
+If we try to use \texttt{tidyverse} functions the way we normally would
+within our functions, they won't work.
+
+First, let's load our packages and get some data from Palmer Penguins.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.3.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'palmerpenguins' was built under R version 4.3.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\OtherTok{\textless{}{-}}\NormalTok{ penguins}
+\end{Highlighting}
+\end{Shaded}
+
+Now, let's write some code for a ggplot within a function as we normally
+would.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make\_plot }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, column, label) \{}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ column)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(label)}
+\NormalTok{\}}
+
+\FunctionTok{make\_plot}\NormalTok{(penguins, body\_mass\_g, }\StringTok{"Body Mass (g)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To fix this issue, we have to tell our code which inputs/arguments are
+this special type of data variable.
+
+We can do this by ``embracing'' them in double braces. This tells the
+function to treat them in the ``tidy evaluation'' method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make\_plot }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, column, label) \{}
+    \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ \{\{ column \}\})) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(label)}
+\NormalTok{\}}
+
+\FunctionTok{make\_plot}\NormalTok{(penguins, body\_mass\_g, }\StringTok{"Body Mass (g)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing non-finite outside the scale range
+## (`stat_bin()`).
+\end{verbatim}
+
+\includegraphics{Week10_Functions_Instructor_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_plot}\NormalTok{(penguins, bill\_length\_mm, }\StringTok{"Bill Length (mm)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing non-finite outside the scale range
+## (`stat_bin()`).
+\end{verbatim}
+
+\includegraphics{Week10_Functions_Instructor_files/figure-latex/unnamed-chunk-11-2.pdf}
+
+\hypertarget{code-design-with-functions}{%
+\subsubsection{Code Design with
+Functions}\label{code-design-with-functions}}
+
+Functions let us break code up into logical chunks that can be
+understood in isolation.
+
+When you write functions, place them at the top of your code then call
+them below.
+
+The functions hold the details. You can heavily comment the code of your
+functions, as well.
+
+The function calls will show you the outline of the code execution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_data }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data)\{}
+  \FunctionTok{do\_stuff}\NormalTok{(data)}
+\NormalTok{\}}
+
+\NormalTok{process\_data }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(cleaned\_data)\{}
+  \FunctionTok{do\_dplyr\_stuff}\NormalTok{(cleaned\_data)}
+\NormalTok{\}}
+
+\NormalTok{make\_graph }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(processed\_data)\{}
+  \FunctionTok{do\_ggplot\_stuff}\NormalTok{(processed\_data)}
+\NormalTok{\}}
+
+\NormalTok{raw\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}mydata.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{cleaned\_data }\OtherTok{\textless{}{-}} \FunctionTok{clean\_data}\NormalTok{(raw\_data)}
+\NormalTok{processed\_data }\OtherTok{\textless{}{-}} \FunctionTok{process\_data}\NormalTok{(cleaned\_data)}
+\FunctionTok{make\_graph}\NormalTok{(processed\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
