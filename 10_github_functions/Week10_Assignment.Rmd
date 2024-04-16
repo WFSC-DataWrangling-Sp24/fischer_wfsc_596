@@ -232,6 +232,10 @@ get_mass_from_length(12, 10.95, 2.64) %>%
 
 First, load either the `tidyverse` or `ggplot2`, if you haven't already done so in this document.
 
+```{r}
+library(tidyverse)
+```
+
 a.  Run the code below, then combine the vectors into a data frame named `count_data` with columns named `state`, `count`, `area`, and `site`.
 
 ```{r}
@@ -246,14 +250,15 @@ count_data  <- cbind(state_vector, site_vector, count_vector, area_vector)
 b.  Write a function takes takes two arguments: (1) a data frame with a `count` column and an `area` column; and (2) a column in that data frame to color the points by. Have the function make a plot with `area` on the x-axis and `count` on the y-axis and the points colored by the column you provided as an argument. Set the size of the points to 3. Use the function to make a scatter plot of count as a function of area for the `count_data` data frame with the points colored by the `state` column.
 
     ```{r}
-    make_plot <- function(df, count_vector, area_vector) {
-        ggplot(data = df, mapping = aes(x = {{ count_vector }})) +
-        geom_point(aes(size=3)) +
-        labs(x = "Area [ha]",
-             y = "Number of individuals")
+    make_plot <- function(df, column) {
+      ggplot(data = df, mapping = aes(x = area_vector, y = count_vector, color = {{column}})) +
+        geom_point(size = 3) +
+        labs(x = "Area [ha]", y = "Number of Individuals")
     }
 
-    make_plot(count_data, count, area)
+    make_plot(count_data, state_vector)
+
+    ggsave(file="state_area.png")
     ```
 
 Save your plot as a .png file using `ggsave()`.
@@ -261,7 +266,9 @@ Save your plot as a .png file using `ggsave()`.
 c.  Use the function from (b) to make a scatter plot of count as a function of area for the `count_data` data frame with the points colored by the `site` column.
 
     ```{r}
+    make_plot(count_data, site_vector)
 
+    ggsave(file = "state_site.png")
     ```
 
 Save your plot as a .png file using `ggsave()`.
