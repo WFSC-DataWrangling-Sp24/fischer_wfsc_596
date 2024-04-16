@@ -71,26 +71,23 @@ Now, let's begin to code!
 a.  Load the 3 dataframes (surveys, species, plots) into R using `read_csv()`. Make sure your paths are *relative*.
 
     ```{r}
-    surveys <- read_csv("https://ndownloader.figshare.com/files/2292172",
-    "../raw_data/surveys.csv")
-    plots <- read_csv("https://ndownloader.figshare.com/files/3299474",
-    "../raw_data/plots.csv")
-    species <- read_csv("https://ndownloader.figshare.com/files/3299483",
-    "../raw_data/species.csv")
+    surveys <- read_csv("https://ndownloader.figshare.com/files/2292172")
+    plots <- read_csv("https://ndownloader.figshare.com/files/3299474")
+    species <- read_csv("https://ndownloader.figshare.com/files/3299483")
 
     ```
 
 b.  Copy the answers from Week 8 Assignment, Questions 2d-f, into the code chunk below.
 
     ```{r}
-    species_surveys <- inner_join(surveys, species, join_by("species_id"))
+    species_surveys <- inner_join(surveys, species, join_by(species_id))
 
     dipodomys_plots <- inner_join(species_surveys, plots, join_by(plot_id))%>% filter(genus == "Dipodomys")%>% select(year, genus, species, weight, plot_type)
 
     dipodomys_plots
 
-    ggplot(surveys, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +   geom_point()
-    + labs(x = "Weight (g)", y = "Hindfoot length (mm)") + scale_x_log10
+    ggplot(surveys, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +   geom_point()+
+      labs(x = "Weight (g)", y = "Hindfoot length (mm)") + scale_x_log10()
 
     total_weights <- surveys %>% filter(!is.na(weight))
 
@@ -103,10 +100,32 @@ b.  Copy the answers from Week 8 Assignment, Questions 2d-f, into the code chunk
 c.  Save the output of the code from 2d as a new dataframe. Then, save that resulting dataframe as a csv file in the clean data sub-directory using the `write_csv()` function.
 
     ```{r}
-
+    write_csv(total_weights, file =  "../clean_data/total_weights.csv")
     ```
 
 d.  Save the ggplots from 2e and 2f into the outputs folder using the `ggsave()` function.
+
+    ```{r}
+    ggplot(surveys, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +
+    geom_point() +
+    labs(x = "Weight (g)", y = "Hindfoot length (mm)") +
+    scale_x_log10()
+
+    ggsave(file = "../outputs/weight_hindfoot_scatter.png")
+    ```
+
+e.  
+
+    ```{r}
+    total_weights <- surveys %>%
+    filter(!is.na (weight))
+    ggplot(total_weights, aes(x = weight)) +
+    geom_histogram() +
+    labs(x = "Weight (g)", y = "Number of individuals") +
+    facet_wrap(~species_id, scales = "free_y")
+
+    ggsave(file = "../outputs/weight_genus_histos.png")
+    ```
 
 ### 3. Palmer Penguins and Path Files (20 points)
 
@@ -160,7 +179,7 @@ c.  Run the `setdiff()` function to make sure that your code worked (it shouldn'
 d.  Save your version of the cleaned penguins data into your clean data folder.
 
     ```{r}
-
+    write_csv(penguins_gf, file =  "../clean_data/penguins_gf.csv")
     ```
 
 ### 4. Add Version Control: Together in Class (15 points)
