@@ -102,10 +102,10 @@ h.  `x` times `w` is between 13.2 and 13.5
     (x*w) > 13.2 & (x*w) < 13.5
     ```
 
-i.  **Each mass in `masses` is between 30 and 50.**
+i.  Each mass in `masses` is between 30 and 50.
 
     ```{r}
-
+    masses > 30 & masses < 50
     ```
 
 ### 2. If Statements (20 points)
@@ -234,18 +234,33 @@ Create a new function `get_mass_from_length_by_name()` that takes two arguments,
 -   *Theropoda*: `mass = 0.73 * length ^ 3.63` ([Seebacher 2001](http://www.jstor.org/stable/4524171))
 -   *Sauropoda*: `mass = 214.44 * length ^ 1.46` ([Seebacher 2001](http://www.jstor.org/stable/4524171))
 
-**If the name is not any of these values the function should return `NA`.**
+If the name is not any of these values the function should return `NA`.
 
 ```{r}
 get_mass_from_length_by_name <- function(length, name){
-  
+  if(name == "Stegosauria"){
+      mass <- 10.95 * length ^ 2.64
+  } else if(name == "Theropoda"){
+    mass <- 0.73 * length ^ 3.63
+  } else if(name == "Sauropoda"){
+    mass <- 214.44 * length ^ 1.46
+  }else {
+    mass <- NA
+  }
+  return(mass)
 }
 ```
 
-**Run the function for: a. A *Stegosauria* that is 10 meters long. b. A *Theropoda* that is 8 meters long. c. A *Sauropoda* that is 12 meters long. d. A *Ankylosauria* that is 13 meters long.**
+Run the function for: a. A *Stegosauria* that is 10 meters long. b. A *Theropoda* that is 8 meters long. c. A *Sauropoda* that is 12 meters long. d. A *Ankylosauria* that is 13 meters long.
 
 ```{r}
-get_mass_from_length_by_name()
+get_mass_from_length_by_name(10, "Stegosauria")
+
+get_mass_from_length_by_name(8, "Theropoda")
+
+get_mass_from_length_by_name(12, "Sauropoda")
+
+get_mass_from_length_by_name(13, "Ankylosauria")
 ```
 
 ### 5. Using `dplyr` Choice Functions (20 points)
