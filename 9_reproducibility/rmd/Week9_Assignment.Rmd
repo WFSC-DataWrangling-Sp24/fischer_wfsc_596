@@ -72,32 +72,32 @@ a.  Load the 3 dataframes (surveys, species, plots) into R using `read_csv()`. M
 
     ```{r}
     surveys <- read_csv("https://ndownloader.figshare.com/files/2292172",
-    "surveys.csv")
+    "../raw_data/surveys.csv")
     plots <- read_csv("https://ndownloader.figshare.com/files/3299474",
-    "plots.csv")
+    "../raw_data/plots.csv")
     species <- read_csv("https://ndownloader.figshare.com/files/3299483",
-    "species.csv")
+    "../raw_data/species.csv")
 
     ```
 
 b.  Copy the answers from Week 8 Assignment, Questions 2d-f, into the code chunk below.
 
-    \`\`\`{r}d} species_surveys \<- inner_join(surveys, species, join_by(species_id))
+    ```{r}
+    species_surveys <- inner_join(surveys, species, join_by("species_id"))
 
-    dipodomys_plots \<- inner_join(species_surveys, plots, join_by(plot_id)) %\>% filter(genus == "Dipodomys") %\>% select(year, genus, species, weight, plot_type)
+    dipodomys_plots <- inner_join(species_surveys, plots, join_by(plot_id))%>% filter(genus == "Dipodomys")%>% select(year, genus, species, weight, plot_type)
 
     dipodomys_plots
 
-    ggplot(surveys, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) + geom_point() + labs(x = "Weight (g)", y = "Hindfoot length (mm)") + scale_x_log10()
+    ggplot(surveys, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +   geom_point()
+    + labs(x = "Weight (g)", y = "Hindfoot length (mm)") + scale_x_log10
 
-    total_weights \<- surveys %\>% filter(!is.na (weight)) ggplot(total_weights, aes(x = weight)) + geom_histogram() + labs(x = "Weight (g)", y = "Number of individuals") + facet_wrap(\~species_id, scales = "free_y")
+    total_weights <- surveys %>% filter(!is.na(weight))
 
-    ```         
-
-    ```{}
-    ```
-
-    ```         
+    ggplot(total_weights, aes(x = weight)) + 
+      geom_histogram() +
+      labs(x = "Weight (g)", y = "Number of individuals") +
+      facet_wrap(~species_id, scales = "free_y")
     ```
 
 c.  Save the output of the code from 2d as a new dataframe. Then, save that resulting dataframe as a csv file in the clean data sub-directory using the `write_csv()` function.
