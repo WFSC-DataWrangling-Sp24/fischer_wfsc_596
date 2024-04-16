@@ -1,0 +1,132 @@
+---
+title: "Final Project Proposal"
+author: "Gracie Ann Fischer"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Final Project Proposal
+
+Answering the questions in this document are worth 20 points for Question 5 in Week 9's Assignment.
+
+## Where to Find Data
+
+**If you have your own data from a research project, use it!**
+
+If you don't have your own data, here are some suggestions for where to find data:
+
+1.  From your lab group
+
+If you are working in a lab group, you can almost certainly find data to work with from your lab! Ask your PI or other lab members if you can use their data for this project. It is often helpful to have data that relates somewhat to a project or topic you are familiar with.
+
+2.  From me (actually from the National Phenology Network)!
+
+I currently have a project helping the National Phenology Network take data collected by communitiy members and cleaning it up so it can be integrated into the NPN database.
+
+If you choose to work with one of these datasets, I can give you some guidance on what the end product should look like.
+
+You can find a list of the dataset options [here](https://archive.usanpn.org/results/dataset-list).
+
+3.  From the "Data is Plural" Archive
+
+[Data is Plural](https://www.data-is-plural.com/) is a weekly newsletter about complied datasets that people have found. They have an archive of all of the datasets that have been included in the newsletters, which is nearly 2000.
+
+Just because the datasets have been compiled does not mean that they are clean! I've used a few of them in class as demonstrations.
+
+4.  From an agency, NGO, or non-profit
+
+If you have contacts in a local, state, or federal agency or non-profit, they likely have some languishing data floating around that you can clean up.
+
+5.  A data repository
+
+There are many data repositories where you can find data. I would recommend sticking to some of the other options above to keep your search a bit more constrained, but feel free to ultimately use any dataset you find that you would like to use.
+
+## Project Guidelines
+
+As a reminder, the general guidelines for the final project that the project will need to include core concepts covered in a certain number of weeks (6 for WFSC 496B, 10 for WFSC 596B), bringing together many aspects of what we will have learned through the course of the semester.
+
+The final project for this course is worth 300 points (WFSC 496B) or 500 points (WFSC 596B).
+
+## Questions
+
+The following answers are not binding! You can change your final project as much as you'd like from what you propose here.
+
+Answering these questions is meant to get you thinking about what data you would like to use and what tasks you might perform with the data.
+
+Note: Your data set does not need to be ecological in nature if you have another interest. It should also not be a dataset that we have used in class (see me if you have questions).
+
+1.  What data are you planning to use for the final project? Describe the data: its contents, its format(s), one or more dataframes, etc. If you have a link to the dataset, please include it. If you have a file that you can upload, please add it to the assignment submission.
+
+    1.  I am planning on using data that Desiree and I have gathered from multiple open-access sources. A complete list:
+
+        1.  Weather variables (precip, temp, humidity, wind direction, wind speed)
+
+            1.  Iowa Environmental Mesonet (Iowa State) \> ASOS data
+
+        2.  Elevation (DEM), slope, aspect
+
+            1.  USGS
+
+        3.  Landcover
+
+            1.  MDAUS BaseView 2013
+
+        4.  NDVI
+
+            1.  LandSat (NASA, USGS)
+
+        5.  Bird occurrence data
+
+            1.  iNaturalist
+
+            2.  GBIF
+
+2.  Does this data need to be cleaned in any way to make it tidy? If so, what needs to occur?
+
+    1.  I have cleaned the bird occurrence data. It came formatted as spreadsheets, with many variables that are not of interest for our project. The data needed to be parsed down and them properly formatted to be inputted into MaxEnt habitat distribution modeling software.
+
+3.  Speaking generally, what tasks will you perform with this dataset? It might include tasks that we have not yet covered how to accomplish in class, but come up with a general plan that you would like to follow.
+
+    1.  Tasks that were performed on these iNaturalist and GBIF datasets include:
+
+        1.  Making all of the variables between the two data sources match.
+
+            1.  Only four columns were of interest from GBIF dataset, seen in the iNaturalist dataset: observed_on, latitude, longitude, and scientific_name. The GBIF dataset was parsed down by selecting necessary columns: genus, species, decimalLatitude, decimalLongitude, day, month, and year.
+
+            2.  iNaturalist had one column for observed date (observed_on) in MM/DD/YYYY format. GBIF had each of these date elements in their own column. Columns were merged and GBIF observation data was converted into MM/DD/YYY format to match iNaturalist.
+
+            3.  iNaturalist had one column for species identification (scientific_name), formatted as Genus species. GBIF had separate columns for the genus and species names. The two columns were combined in the GBIF dataframe to achieve the same variable format at the iNaturalist column.
+
+            4.  Once the GBIF data frame was cleaned as described above, it was merged with the iNaturalist dataframe.
+
+            5.  These large dataframes, per species, were then filtered and divided into dataframes for each species per season (Spring = March, April, May; summer = June, July, August; fall = September, October, November).
+
+4.  One of the requirements of the final project is to make some type of plot using `ggplot2` with the data. What do you plan to plot from your data?
+
+    1.  I think I will make a scatter plot depicting the amount of occurrences per species per month. Each species can have its own plot, with number of occurrences on the y-axis, and month of the year on the x-axis.
+
+# Reflection
+
+This reflection is worth 25 points, separate from your Week 9 assignment. Reflections are graded for completion only.
+
+Write about 5 sentences addressing *at least* one of the following questions.
+
+-   What has worked well for you in this course for you so far?
+-   What has been particularly challenging for you so far?
+    -   This is late coming in, but I will discuss my challenges now: I was able to understand what we were doing rather well until weeks 10 and 12. I need to practice creating functions, but more importantly, I struggle to understand the syntax behind iterations and if/else statements. It doesn't help that I was sick one week, and then busy preparing for my summer field work the next! However, attending office hours is my lifeline, and the extensions that I have received for the few assignments that I fell behind on have been lifesavers. My plan, for week 10-12 content, is to watch the recordings carefully, as opposed to just reading the class notes as I have been.
+-   Is there anything that I can do to help your learning in the course?
+-   Other reflections about the content of the module that you would like to share.
+
+*Answer*:
+
+## Submitting this File
+
+1.  Create a new repository in the class GitHub organization for your final project. Use the naming convention "LastName_FinalProject"
+2.  Connect the repository to an RStudio project
+3.  Create a series of appropriate sub-directories in your RStudio Project, including a `documents` folder.
+4.  Move this file to the documents folder.
+5.  Stage, commit, and push this document (and sub-directory) to GitHub with a descriptive commit message.
