@@ -7,6 +7,8 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
 ```
 
 # Assignment
@@ -136,14 +138,54 @@ Write a function `mass_from_length()` that uses the equation `mass <- a * length
 -   For any other value of `species`: `mass = 25.37 * length ^ 2.49`
 
 ```{r}
-mass_from_length <- function(length, species){
-  mass <- 
+mass_from_length  <- function(length, species){
+  if(species == "Stegosauria"){
+      mass <- 10.95 * length ^ 2.64
+  } else if(species == "Theropoda"){
+    mass <- 0.73 * length ^ 3.63
+  } else if(species == "Sauropoda"){
+    mass <- 214.44 * length ^ 1.46
+  } else {
+    mass <- 25.37 * length ^ 2.49
+  }
+  return(mass)
 }
+
 ```
 
 a.  Use this function and a for loop to calculate the estimated mass for each dinosaur, store the masses in a vector, and after all of the calculations are complete show the first few items in the vector using `head()`.
+
+    ```{r}
+    masses <- vector(mode = "numeric", length = length(species))
+
+      for (i in 1:nrow(dinosaur_lengths)){
+        mass <- mass_from_length(dinosaur_lengths$lengths[i],
+                                dinosaur_lengths$species[i])
+      masses[i] <- mass
+    }
+    head(masses)
+
+    ```
+
 b.  Add the results in the vector back to the original data frame. Show the first few rows of the data frame using `head()`.
+
+    ```{r}
+    masses <- data.frame(masses)
+
+    dino_masses <- cbind(dinosaur_lengths, masses)
+
+    head(dino_masses)
+    ```
+
 c.  Calculate the mean mass for each `species` using `dplyr` (no `for` loops).
+
+    ```{r}
+    library(dplyr)
+
+    dino_masses %>% 
+      group_by(species) %>% 
+      summarise(avg_masses = mean(masses))
+    ```
 
 ### 3. Multi-file Analysis (40 pts)
 
@@ -151,14 +193,38 @@ You have satellite collars on a number of different individuals and want to be a
 
 Start your solution by:
 
--   If `individual_collar_data.zip` is not already in your working directory, download it from the link above and place the zip file in the correct directory.
--   Unzip it using `unzip()`
 -   Obtain a list of all of the files with file names matching the pattern `"collar-data-.*.txt"` (using `list.files()`)
 
-a.  Use a loop to load each of these files into R and make a line plot (using `geom_path()`) for each file with `long` on the `x` axis and `lat` on the `y` axis.
+    ```{r}
+    download.file(url = "http://www.datacarpentry.org/semester-biology/data/individual_collar_data.zip",
+                  destfile = "../data_raw/locations.zip") # where to put the zip file
+
+    # unzip function to open the zip file
+    # zipfile argument is the location of the file to be 
+    unzip(zipfile = "../data_raw/locations.zip", exdir = "../data_raw/")
+
+    list.files(pattern = "collar-data-.*.txt")
+
+    collar_files <- list.files(pattern = "collar-data-.*.txt")
+
+    collar_files
+    ```
+
+-   Use a loop to load each of these files into R and make a line plot (using `geom_path()`) for each file with `long` on the `x` axis and `lat` on the `y` axis.
 
     ```{r}
+    num_files <- length(collar_files)
+    results <- vector(mode = "integer", length = num_files)
 
+    for (i in 1:num_files){
+      filename  <- collar_files[i]
+      data <- read.csv(paste0("../data_raw/", filename))
+      print(
+        ggplot(data = data, mapping = aes(x = long, y = lat)) +
+          geom_path() +
+          ggtitle(collar_files[i])
+      )
+    }
     ```
 
 Graphs, like other types of output, won't display inside a loop unless you explicitly display them, so you need put your `ggplot()` command inside a `print()` statement.
@@ -166,6 +232,23 @@ Graphs, like other types of output, won't display inside a loop unless you expli
 Include the name of the file in the graph as the graph title using the `ggtitle()`.
 
 b.  Add code to the loop to calculate the minimum and maximum latitude in the file, and store these values, along with the name of the file, in a data frame.
+
+    ```{r}
+    for (i in 1:num_files){
+      
+      # read in the data file
+      filename <- collar_files[i]
+      data <- read.csv(paste0("../data_raw/", filename))
+      
+      # add information about the data file into the data frame
+      results$file_name[i] <- filename
+      results$min_lat[i] <- min(data$lat)
+      results$max_lat[i] <- max(data$lat)
+      
+    }
+
+    results
+    ```
 
 Show the data frame as output.
 
@@ -181,3 +264,5 @@ Write about 5 sentences addressing *at least* one of the following questions.
 -   Other reflections about the content of the course that you would like to share.
 
 *Answer*:
+
+These last few weeks with iterations and R/Github connects have been a bit difficult for me, but it might just be that time of the semester where things really feel like they're piling up! I've started watching the actual lecture recordings for Thursday morning sessions, and they have been helping tremendously. The final project does not worry me too much, as I already have a lot of data cleaning and organizing completed from far earlier in the semester for one of my own projects. However, the idea of bringing in the concepts from lessons 11-12 do make me a bit nervous when it comes to using them in my project. This is just because, as stated before, it is the content in this class that I am the most unfamiliar/uncomfortable with thus far.
